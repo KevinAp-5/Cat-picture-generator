@@ -1,6 +1,14 @@
 import os
 import requests
 
+def delete_images():
+    path = os.listdir(f'{os.getcwd()}/cats/')
+    if path != []:
+        for x in path:
+            os.remove(f'{os.getcwd()}/cats/{x}')
+
+delete_images()
+
 api = 'https://api.thecatapi.com/v1/images/search'
 image_url = requests.get(api, headers={'User-Agent': 'python'})
 
@@ -25,7 +33,6 @@ for x, y in url[0].items():
             except Exception:
                 raise
             else:
-                os.system(f'xdg-open cats/{name}')  # open the image
-
-
+                pass
+#                os.system(f'xdg-open cats/{name}')  # open the image
 
