@@ -1,9 +1,11 @@
 import os
 import requests
 
-
-path = os.listdir(f'{os.getcwd()}/cats/')  # remove the old cat photos
-if path != []:
+try:
+    path = os.listdir(f'{os.getcwd()}/cats/')  # remove the old cat photos
+except FileNotFoundError:
+    os.mkdir(f'{os.getcwd()}/cats/')
+else:
     for x in path:
         os.remove(f'{os.getcwd()}/cats/{x}')
 
