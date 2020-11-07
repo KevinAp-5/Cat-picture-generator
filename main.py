@@ -1,14 +1,15 @@
 import os
 import requests
+import webbrowser
 
+mypath = f'{os.getcwd()}/cats/'
 try:
-    path = os.listdir(f'{os.getcwd()}/cats/')  # remove the old cat photos
+    path = os.listdir(mypath)  # remove the old cat photos
 except FileNotFoundError:
-    os.mkdir(f'{os.getcwd()}/cats/')
+    os.mkdir(mypath)
 else:
     for x in path:
-        os.remove(f'{os.getcwd()}/cats/{x}')
-
+        os.remove(mypath+x)
 
 api = 'https://api.thecatapi.com/v1/images/search'
 counter = 0
@@ -17,7 +18,7 @@ while True:
     if image_url.status_code != 200:
         print(f'Error: {image_url.status_code}\nTrying again...')
         if counter == 5:
-            print('Error trying to request...\nVerify you connection.')
+            print('Error trying to request... Verify you connection.', counter)
             exit()
         counter += 1
         continue
@@ -41,5 +42,5 @@ for x, y in url[0].items():
             except Exception:
                 raise
             else:
-                os.system(f'sensible-browser cats/{name}')  # open the image
+                webbrowser.open(f'cats/{name}')  # open the image
 
