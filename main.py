@@ -1,6 +1,6 @@
 import os
 import requests
-import webbrowser
+from PIL import Image
 
 mypath = f'{os.getcwd()}/cats/'
 try:
@@ -25,7 +25,6 @@ while True:
     else:
         break
 
-
 url = image_url.json()
 name = ''
 for x, y in url[0].items():
@@ -42,5 +41,6 @@ for x, y in url[0].items():
             except Exception:
                 raise
             else:
-                webbrowser.open(f'cats/{name}')  # open the image
-
+                a = f'cats/{name}'
+                photo = Image.open(r'{}'.format(a))  # Open the image
+                photo.show()
