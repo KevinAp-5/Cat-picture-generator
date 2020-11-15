@@ -1,6 +1,7 @@
 import os
 import requests
 from PIL import Image
+from platform import system
 
 mypath = f'{os.getcwd()}/cats/'
 try:
@@ -42,5 +43,8 @@ for x, y in url[0].items():
                 raise
             else:
                 a = f'cats/{name}'
-                photo = Image.open(r'{}'.format(a))  # Open the image
-                photo.show()
+                if 'linux' in system().lower():
+                    os.system(f'xdg-open {a}')
+                else:
+                    photo = Image.open(r'{}'.format(a))  # Open the image
+                    photo.show()
