@@ -1,6 +1,7 @@
 import os
 import requests
 from PIL import Image
+from platform import system
 
 mypath = f'{os.getcwd()}/cats/'
 try:
@@ -15,7 +16,7 @@ api = 'https://api.thecatapi.com/v1/images/search'
 
 image_url = requests.get(api, headers={'User-Agent': 'python'})
 if image_url.status_code != 200:
-    print(f'Error: {image_url.status_code}. Verify your conection')
+    print(f'Error: {image_url.status_code}. Verify your connection')
 
 url = image_url.json()
 for x, y in url[0].items():
@@ -32,6 +33,9 @@ for x, y in url[0].items():
             except Exception:
                 raise
             else:
-                a = f'cats/{name}'
-                photo = Image.open(r'{}'.format(a))  # Open the image
-                photo.show()  # Show the image
+                path_cat = f'cats/{name}'
+                if 'linux' in system():
+                    os.system(f'xdg-open {path_cat}')
+                else:
+                    photo = Image.open(r'{}'.format(path_cat))  # Open image
+                    photo.show()  # Show the image
