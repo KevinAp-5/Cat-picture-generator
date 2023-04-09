@@ -3,20 +3,23 @@ import requests
 from PIL import Image
 from time import sleep
 from platform import system
+from contextlib import suppress
 
-mypath = f'{os.getcwd()}/cats/'
+quantidade = int(input('Quantas fotos de gatos você quer?\n>>> ').strip())
 
-try:
-    path = os.listdir(mypath)  # remove the old cat photos
-except FileNotFoundError:
-    os.mkdir(mypath)
-else:
-    for x in path:
-        os.remove(mypath+x)
+def folder_path():
+    return f'{os.getcwd()}/cats/'
 
-api = 'https://api.thecatapi.com/v1/images/search'
+def create_folder():
+    if os.path.isdir(folder_path()) is False:
+        os.mkdir(folder_path())
+        return True
+    else:
+        return False
 
-image_url = requests.get(api, headers={'User-Agent': 'python'})
+def remove_photos():
+    for photo in os.listdir(folder_path()):
+        os.remove(f'{folder_path()}{photo}')
 
 if image_url.status_code != 200:
     print(f'Error: {image_url.status_code}. Verify your connection')
