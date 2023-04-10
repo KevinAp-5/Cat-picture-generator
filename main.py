@@ -18,3 +18,9 @@ def create_folder():
 def remove_photos():
     for photo in os.listdir(folder_path()):
         os.remove(f'{folder_path()}{photo}')
+
+def check_api_status(request):
+    if request.status_code != 200:
+        print(f'Error: {image_url.status_code}. Verify your connection')
+    else:
+        print('Connection with the API was successful.')
