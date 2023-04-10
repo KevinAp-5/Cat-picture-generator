@@ -5,8 +5,6 @@ from time import sleep
 from platform import system
 from contextlib import suppress
 
-quantidade = int(input('Quantas fotos de gatos você quer?\n>>> ').strip())
-
 def folder_path():
     return f'{os.getcwd()}/cats/'
 
