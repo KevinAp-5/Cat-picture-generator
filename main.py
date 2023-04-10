@@ -14,3 +14,7 @@ def create_folder():
         return True
     else:
         return False
+
+def remove_photos():
+    for photo in os.listdir(folder_path()):
+        os.remove(f'{folder_path()}{photo}')
