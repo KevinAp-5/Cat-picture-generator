@@ -19,35 +19,36 @@ def remove_photos():
     for photo in os.listdir(folder_path()):
         os.remove(f'{folder_path()}{photo}')
 
-if image_url.status_code != 200:
-    print(f'Error: {image_url.status_code}. Verify your connection')
-else:
-    print('Connection with the API was successful.')
-    sleep(1)
+def check_api_status(request):
+    if request.status_code != 200:
+        print(f'Error: {image_url.status_code}. Verify your connection')
+    else:
+        print('Connection with the API was successful.')
 
-url = image_url.json()
-print('Searching for a very cute cat photo for you.')
-sleep(1.2)
-for x, y in url[0].items():
-    if x == 'url':
-        name = y.split('/')[-1]
-        try:
-            x = requests.get(y)
-        except Exception:
-            raise
-        else:
-            print('Opening the cat photo.')
-            sleep(0.4)
-            try:
-                with open(f'cats/{name}', 'wb') as foto:
-                    foto.write(x.content)  # Write the picture
-            except Exception:
-                raise
-            else:
-                path_cat = f'cats/{name}'
-                if 'linux' in system():
-                    os.system(f'xdg-open {path_cat}')
-                else:
-                    photo = Image.open(r'{}'.format(path_cat))  # Open image
-                    photo.show()  # Show the image
+def get_url():
+    api_url = requests.get('https://api.thecatapi.com/v1/images/search')
+    return api_url.json()[0].get('url')
+
+def arquivado(image_url):
+    with suppress():
+        return requests.get(image_url)
+
+
+def save_picture(foto, file_name):
+    with open(f'{folder_path()}{file_name}', 'wb') as arquivo:
+        arquivo.write(foto.content)
+
+def open_image(file_name):
+    photo = Image.open(f'cats/{file_name}')
+    photo.show()
+
+if __name__ == '__main__':
+    if create_folder() is False:
+        remove_photos()
+
+    file_name = get_url().split('/')[-1]
+    image_url = get_url()
+    check_api_status(arquivado(image_url))
+    save_picture(arquivado(image_url), file_name)
+    open_image(file_name)
 
