@@ -32,3 +32,7 @@ def get_url():
 def arquivado(image_url):
     with suppress():
         return requests.get(image_url)
+
+def save_picture(foto, file_name):
+    with open(f'{folder_path()}{file_name}', 'wb') as arquivo:
+        arquivo.write(foto.content)
