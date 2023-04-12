@@ -28,3 +28,7 @@ def check_api_status(request):
 def get_url():
     api_url = requests.get('https://api.thecatapi.com/v1/images/search')
     return api_url.json()[0].get('url')
+
+def arquivado(image_url):
+    with suppress():
+        return requests.get(image_url)
