@@ -24,3 +24,7 @@ def check_api_status(request):
         print(f'Error: {image_url.status_code}. Verify your connection')
     else:
         print('Connection with the API was successful.')
+
+def get_url():
+    api_url = requests.get('https://api.thecatapi.com/v1/images/search')
+    return api_url.json()[0].get('url')
