@@ -41,3 +41,13 @@ def open_image(file_name):
     photo = Image.open(f'cats/{file_name}')
     photo.show()
 
+if __name__ == '__main__':
+    if create_folder() is False:
+        remove_photos()
+
+    file_name = get_url().split('/')[-1]
+    image_url = get_url()
+    check_api_status(arquivado(image_url))
+    save_picture(arquivado(image_url), file_name)
+    open_image(file_name)
+
