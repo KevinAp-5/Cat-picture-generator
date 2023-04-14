@@ -36,3 +36,8 @@ def arquivado(image_url):
 def save_picture(foto, file_name):
     with open(f'{folder_path()}{file_name}', 'wb') as arquivo:
         arquivo.write(foto.content)
+
+def open_image(file_name):
+    photo = Image.open(f'cats/{file_name}')
+    photo.show()
+
