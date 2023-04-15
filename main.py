@@ -29,13 +29,13 @@ def get_url():
     api_url = requests.get('https://api.thecatapi.com/v1/images/search')
     return api_url.json()[0].get('url')
 
-def arquivado(image_url):
+def request_api(image_url):
     with suppress():
         return requests.get(image_url)
 
 def save_picture(foto, file_name):
-    with open(f'{folder_path()}{file_name}', 'wb') as arquivo:
-        arquivo.write(foto.content)
+    with open(f'{folder_path()}{file_name}', 'wb') as request_:
+        request_.write(foto.content)
 
 def open_image(file_name):
     photo = Image.open(f'cats/{file_name}')
@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
     file_name = get_url().split('/')[-1]
     image_url = get_url()
-    check_api_status(arquivado(image_url))
+    check_api_status(request_api(image_url))
     save_picture(arquivado(image_url), file_name)
     open_image(file_name)
 
