@@ -48,6 +48,6 @@ if __name__ == '__main__':
     file_name = get_url().split('/')[-1]
     image_url = get_url()
     check_api_status(request_api(image_url))
-    save_picture(arquivado(image_url), file_name)
+    save_picture(request_api(image_url), file_name)
     open_image(file_name)
 
