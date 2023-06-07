@@ -6,7 +6,7 @@ from time import sleep
 
 
 def folder_path():
-    return f'{os.getcwd()}/cats/'
+    return f'{os.getcwd()}/.cats/'
 
 
 def create_folder():
@@ -45,7 +45,7 @@ def save_picture(foto, file_name):
 
 
 def open_image(file_name):
-    photo = Image.open(f'cats/{file_name}')
+    photo = Image.open(f'.cats/{file_name}')
     photo.show()
 
 
