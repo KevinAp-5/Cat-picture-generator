@@ -17,3 +17,8 @@ class FolderManip():
         else:
             os.mkdir(self.folder_path)
             self.folder_exist = True
+
+    def remove_photos(self):
+        if self.folder_exist is True:
+            for photo in os.listdir(self.folder_path):
+                os.remove(f'{self.folder_path}{photo}')
