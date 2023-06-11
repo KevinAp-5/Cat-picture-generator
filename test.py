@@ -12,8 +12,8 @@ class FolderManip():
         self.create_folder()
 
     def create_folder(self):
-        if os.path.isdir(self.folder_path) is False:
-            os.mkdir(self.folder_path)
+        if os.path.isdir(self.folder_path):
             self.folder_exist = True
         else:
+            os.mkdir(self.folder_path)
             self.folder_exist = True
