@@ -22,3 +22,8 @@ class FolderManip():
         if self.folder_exist is True:
             for photo in os.listdir(self.folder_path):
                 os.remove(f'{self.folder_path}{photo}')
+
+
+class Api():
+    def __init__(self):
+        self.api = 'https://api.thecatapi.com/v1/images/search'
