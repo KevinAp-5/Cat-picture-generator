@@ -34,3 +34,10 @@ class Api():
             exit()
         else:
             print('Connection was successful.')
+
+    def get_image_url(self):
+        api_url = requests.get(self.api)
+        print('Connecting to API...')
+        sleep(0.5)
+        self.check_api_status(api_url)
+        return api_url.json()[0].get('url')
