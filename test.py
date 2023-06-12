@@ -41,3 +41,11 @@ class Api():
         sleep(0.5)
         self.check_api_status(api_url)
         return api_url.json()[0].get('url')
+
+    def request_image_url(self, image_url):
+        with suppress():
+            image = requests.get(image_url)
+            print('Collecting the photo...')
+            sleep(0.5)
+            self.check_api_status(image)
+            return image
