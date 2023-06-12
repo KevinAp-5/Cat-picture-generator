@@ -49,3 +49,11 @@ class Api():
             sleep(0.5)
             self.check_api_status(image)
             return image
+
+
+class Photo():
+    def __init__(self, api, foldermanip):
+        self.api = api()
+        self.foldermanip = foldermanip()
+        self.image_url = self.api.get_image_url()
+        self.image_name = self.image_url.split('/')[-1]
