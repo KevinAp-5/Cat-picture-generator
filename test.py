@@ -63,3 +63,7 @@ class Photo():
 
     def get_photo(self):
         return self.api.request_image_url(self.image_url)
+
+    def save_picture(self):
+        with open(f'{self.image_path()}', 'wb') as file:
+            file.write(self.get_photo().content)
