@@ -61,3 +61,5 @@ class Photo():
     def image_path(self):
         return f'{self.foldermanip.folder_path}{self.image_name}'
 
+    def get_photo(self):
+        return self.api.request_image_url(self.image_url)
