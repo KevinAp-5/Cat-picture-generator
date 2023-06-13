@@ -57,3 +57,7 @@ class Photo():
         self.foldermanip = foldermanip()
         self.image_url = self.api.get_image_url()
         self.image_name = self.image_url.split('/')[-1]
+
+    def image_path(self):
+        return f'{self.foldermanip.folder_path}{self.image_name}'
+
