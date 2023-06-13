@@ -67,3 +67,8 @@ class Photo():
     def save_picture(self):
         with open(f'{self.image_path()}', 'wb') as file:
             file.write(self.get_photo().content)
+
+    def open_image(self):
+        photo = Image.open(self.image_path())
+        print('Opening the photo!')
+        photo.show()
