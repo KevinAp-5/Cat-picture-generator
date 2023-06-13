@@ -72,3 +72,10 @@ class Photo():
         photo = Image.open(self.image_path())
         print('Opening the photo!')
         photo.show()
+
+
+if __name__ == '__main__':
+    x = Photo(Api, FolderManip)
+    x.foldermanip.remove_photos()
+    x.save_picture()
+    x.open_image()
