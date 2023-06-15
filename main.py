@@ -26,7 +26,7 @@ class FolderManip():
 
 class Api():
     def __init__(self):
-        self.api = 'https://api.thecatapi.com/v1/images/search'
+        self.api_http = 'https://api.thecatapi.com/v1/images/search'
 
     def check_api_status(self, request):
         if request.status_code != 200:
