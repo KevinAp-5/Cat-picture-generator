@@ -10,6 +10,7 @@ class FolderManip():
         self.folder_path = f'{os.getcwd()}/.cats/'
         self.folder_exist = False
         self.create_folder()
+        self.remove_photos()
 
     def create_folder(self):
         if os.path.isdir(self.folder_path):
