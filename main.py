@@ -35,20 +35,14 @@ class Api():
         else:
             print('Connection was successful.')
 
-    def get_image_url(self):
-        api_url = requests.get(self.api)
-        print('Connecting to API...')
-        sleep(0.5)
-        self.check_api_status(api_url)
-        return api_url.json()[0].get('url')
-
-    def request_image_url(self, image_url):
+    def request(self, request, request_text=None):
         with suppress():
-            image = requests.get(image_url)
-            print('Collecting the photo...')
+            requested = requests.get(request)
+            if request_text is not None:
+                print(request_text)
             sleep(0.5)
-            self.check_api_status(image)
-            return image
+            self.check_api_status(requested)
+            return requested
 
 
 class Photo():
