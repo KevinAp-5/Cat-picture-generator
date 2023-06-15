@@ -61,9 +61,9 @@ class ImageManip(FolderManip):
     def image_path(self):
         return f'{self.folder_path}{self.image_name}'
 
-    def save_picture(self):
+    def save_picture(self, image_content):
         with open(f'{self.image_path()}', 'wb') as file:
-            file.write(self.get_photo().content)
+            file.write(image_content.content)
 
     def open_image(self):
         photo = Image.open(self.image_path())
@@ -72,7 +72,11 @@ class ImageManip(FolderManip):
 
 
 if __name__ == '__main__':
-    x = Photo(Api, FolderManip)
-    x.foldermanip.remove_photos()
-    x.save_picture()
-    x.open_image()
+    my_api = Api()
+    cat_json = my_api.request(my_api.api_http, "Connecting to API")
+    image_url = cat_json.json()[0].get('url')
+    image_content = my_api.request(image_url, "Getting the image")
+
+    img = ImageManip(image_url)
+    img.save_picture(image_content)
+    img.open_image()
