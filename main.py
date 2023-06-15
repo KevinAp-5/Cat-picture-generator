@@ -44,19 +44,22 @@ class Api():
             self.check_api_status(requested)
             return requested
 
+    def get_image_url(self, image_url):
+        """
+        Will request the image content from the requested json
+        """
+        cat_json = self.request(image_url)
+        return cat_json.json()[0].get('url')
 
-class Photo():
-    def __init__(self, api, foldermanip):
-        self.api = api()
-        self.foldermanip = foldermanip()
-        self.image_url = self.api.get_image_url()
+
+class ImageManip(FolderManip):
+    def __init__(self, image_url):
+        super().__init__()
+        self.image_url = image_url
         self.image_name = self.image_url.split('/')[-1]
 
     def image_path(self):
-        return f'{self.foldermanip.folder_path}{self.image_name}'
-
-    def get_photo(self):
-        return self.api.request_image_url(self.image_url)
+        return f'{self.folder_path}{self.image_name}'
 
     def save_picture(self):
         with open(f'{self.image_path()}', 'wb') as file:
